@@ -37,7 +37,7 @@ const Home = () => {
       <MovieGrid title={searchTerm ? 'Search Results' : 'Popular Movies'}>
         {state.results.map((movie) => (
           <ThumbNail
-            key={movie.id}
+            key={Math.random() * movie.id}
             clickable
             image={
               movie.poster_path
