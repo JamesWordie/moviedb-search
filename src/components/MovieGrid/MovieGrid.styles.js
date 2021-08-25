@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   }
 
   h1 {
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
       font-size: var(--fontBig);
     }
   }
@@ -18,6 +18,6 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); // css grid for auto fill, self expanding
   grid-gap: 2rem;
 `;

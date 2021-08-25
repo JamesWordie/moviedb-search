@@ -5,15 +5,16 @@ export const Image = styled.img`
   height: 100%;
   max-width: 720px;
   transition: all 0.3s;
-  object-fit: cover;
+  object-fit: cover; // centers the image
   border-radius: 20px;
-  animation: animateMovieThumb 0.5s;
+  animation: animateMovieImage 0.5s;
 
   :hover {
     opacity: 0.8;
+    cursor: crosshair;
   }
 
-  @keyframes animateMovieThumb {
+  @keyframes animateMovieImage {
     from {
       opacity: 0;
     }

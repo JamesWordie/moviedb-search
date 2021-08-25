@@ -41,7 +41,7 @@ export const Content = styled.div`
       outline: none;
     }
 
-    @media screen and (max-width: 720px) {
+    @media (max-width: 720px) {
       font-size: 28px;
     }
   }
