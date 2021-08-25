@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 70px;
+  height: 50px;
   background: var(--medGrey);
   color: var(--white);
 `;
@@ -17,12 +17,16 @@ export const Content = styled.div`
   padding: 0 20px;
 
   span {
-    font-size: 1.2rem;
+    font-size: var(--fontMed);
     color: var(--white);
     padding-right: 10px;
+    cursor: default;
 
-    @media screen and (max-width: 768px) {
-      font-size: 16px;
+    @media (max-width: 768px) {
+      font-size: var(--fontSmall);
     }
+  }
+  a span:hover {
+    cursor: crosshair !important;
   }
 `;

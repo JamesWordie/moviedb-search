@@ -24,12 +24,11 @@ export const Wrapper = styled.div`
 export const Content = styled.div`
   display: flex;
   max-width: 1280px;
-
   margin: 0 auto;
   background: rgb(0, 0, 0, 0.7);
   border-radius: 20px;
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     display: block;
     max-height: none;
   }
@@ -52,11 +51,11 @@ export const Text = styled.div`
     justify-content: center;
     width: 35px;
     height: 35px;
-    background: #fff;
-    color: #000;
+    background: var(--white);
+    color: var(--black);
     font-weight: 800;
-    border-radius: 25px;
-    margin: 0px 0 0 0;
+    border-radius: 50%;
+    margin: 0;
   }
 
   .director {
@@ -68,7 +67,7 @@ export const Text = styled.div`
   }
 
   h1 {
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
       font-size: var(--fontBig);
     }
   }

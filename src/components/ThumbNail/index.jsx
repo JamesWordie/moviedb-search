@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 // styles
-import { Image } from './Movie.styles';
+import { Image } from './ThumbNail.styles';
 
-const Movie = ({ image, movieId, clickable }) => {
+const ThumbNail = ({ image, movieId, clickable }) => {
   return (
     <div>
       {clickable ? (
@@ -18,4 +18,4 @@ const Movie = ({ image, movieId, clickable }) => {
   )
 }
 
-export default Movie;
+export default ThumbNail;

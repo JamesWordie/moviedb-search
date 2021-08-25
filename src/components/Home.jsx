@@ -6,7 +6,7 @@ import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
 // components
 import Banner from './Banner';
 import MovieGrid from './MovieGrid';
-import Movie from './Movie';
+import ThumbNail from './ThumbNail';
 import Loading from './Loading';
 import SearchBar from './SearchBar';
 import Button from './Button';
@@ -36,7 +36,7 @@ const Home = () => {
       <SearchBar setSearchTerm={setSearchTerm} />
       <MovieGrid title={searchTerm ? 'Search Results' : 'Popular Movies'}>
         {state.results.map((movie) => (
-          <Movie
+          <ThumbNail
             key={movie.id}
             clickable
             image={

@@ -32,7 +32,7 @@ export const Content = styled.div`
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     display: block;
 
     .column {

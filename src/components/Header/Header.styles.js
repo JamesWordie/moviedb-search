@@ -12,6 +12,10 @@ export const Content = styled.div`
   max-width: var(--maxWidth);
   padding: 20px 0;
   margin: 0 auto;
+
+  a:hover {
+    cursor: crosshair;
+  }
 `;
 
 export const LogoImg = styled.img`
@@ -20,7 +24,7 @@ export const LogoImg = styled.img`
   @media (max-width: 500px) {
     width: 150px;
   }
-`;
+  `;
 
 export const TMDBLogoImg = styled.img`
   width: 100px;
