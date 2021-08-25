@@ -39,6 +39,10 @@ const MovieInfo = ({ movie }) => {
                 <p key={director.credit_id}>{director.name}</p>
               ))}
             </div>
+            <div className="release-date">
+              <h3>RELEASE DATE</h3>
+              <p>{movie.release_date}</p>
+            </div>
           </div>
         </Text>
       </Content>

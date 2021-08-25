@@ -43,6 +43,11 @@ export const Text = styled.div`
   .rating-director {
     display: flex;
     justify-content: flex-start;
+    @media (max-width: 768px) {
+      div > h3 {
+        margin-top: 15px;
+      }
+    }
   }
 
   .score {
@@ -58,11 +63,19 @@ export const Text = styled.div`
     margin: 0;
   }
 
-  .director {
+  .director, .release-date {
     margin: 0 0 0 40px;
 
     p {
       margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      margin: 0 0 0 20px;
+
+      h3 {
+        font-size: var(--fontSmall);
+      }
     }
   }
 
