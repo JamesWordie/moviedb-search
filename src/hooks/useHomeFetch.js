@@ -3,6 +3,9 @@ import { useState, useEffect, useRef } from 'react';
 // api
 import API from '../API';
 
+// helpers
+import { isPersistedState } from '../helpers';
+
 const initialState = {
   page: 0,
   results: [],
@@ -37,6 +40,15 @@ export const useHomeFetch = () => {
 
   // initial render and search
   useEffect(() => {
+    // if not in a search then search to sessionstorage
+    if (!searchTerm) {
+      const sessionState = isPersistedState('homeState');
+
+      if (sessionState) {
+        setState(sessionState);
+        return;
+      }
+    }
     setState(initialState);
     fetchMovies(1, searchTerm);
   }, [searchTerm]) //dependency array trigger on home component mount and when searchTerm changes
@@ -49,6 +61,13 @@ export const useHomeFetch = () => {
     setIsLoadingMore(false);
 
   }, [isLoadingMore, state.page, searchTerm])
+
+  // write to sessionStorage
+  useEffect(() => {
+    if (!searchTerm) {
+      sessionStorage.setItem('homeState', JSON.stringify(state));
+    }
+  }, [searchTerm, state])
 
   return { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore };
 };
