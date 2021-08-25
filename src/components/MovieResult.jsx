@@ -26,8 +26,6 @@ const MovieResult = () => {
 
   if (error) return <div>Something went wrong...</div>;
 
-  console.log(movie)
-
   return (
     <>
       <BreadCrumb movieTitle={movie.original_title} />
@@ -37,7 +35,7 @@ const MovieResult = () => {
         budget={movie.budget}
         revenue={movie.revenue}
       />
-      <MovieGrid header="Actors">
+      <MovieGrid title="Actors">
         {movie.actors.map((actor) => (
           <Actor
             key={actor.credit_id}
