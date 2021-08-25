@@ -24,7 +24,7 @@ const SearchBar = ({ setSearchTerm }) => {
     // sets up a timer to prevent it triggering immediately
     const timer = setTimeout(() => {
       setSearchTerm(state);
-    }, 500)
+    }, 1000)
 
     return () => clearTimeout(timer)
   }, [setSearchTerm, state])

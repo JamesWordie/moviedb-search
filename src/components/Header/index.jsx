@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import AppLogo from '../../images/react-movie-logo.svg';
 import MovieLogo from '../../images/tmdb_logo.svg';
@@ -9,7 +10,9 @@ const Header = () => {
   return (
     <Wrapper>
       <Content>
-        <LogoImg src={AppLogo} alt="app-logo" />
+        <Link to='/'>
+          <LogoImg src={AppLogo} alt="app-logo" />
+        </Link>
         <TMDBLogoImg src={MovieLogo} alt="moviedb-logo" />
       </Content>
     </Wrapper>

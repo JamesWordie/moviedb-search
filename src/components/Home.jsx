@@ -9,6 +9,7 @@ import MovieGrid from './MovieGrid';
 import Movie from './Movie';
 import Loading from './Loading';
 import SearchBar from './SearchBar';
+import Button from './Button';
 
 // hooks
 import { useHomeFetch } from '../hooks/useHomeFetch';
@@ -17,13 +18,15 @@ import { useHomeFetch } from '../hooks/useHomeFetch';
 import NoImage from '../images/no_image.jpg';
 
 const Home = () => {
-  const { state, loading, error, setSearchTerm } = useHomeFetch();
+  const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useHomeFetch();
 
   const movie = state.results[0];
 
+  if (error) return <div>Something went wrong...</div>;
+
   return (
     <>
-      {movie &&
+      {!searchTerm && movie &&
         <Banner
           image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${movie.backdrop_path}`}
           title={movie.original_title}
@@ -31,7 +34,7 @@ const Home = () => {
         />
       }
       <SearchBar setSearchTerm={setSearchTerm} />
-      <MovieGrid title={'Popular Movies'}>
+      <MovieGrid title={searchTerm ? 'Search Results' : 'Popular Movies'}>
         {state.results.map((movie) => (
           <Movie
             key={movie.id}
@@ -45,7 +48,12 @@ const Home = () => {
           />
         ))}
       </MovieGrid>
-      {/* <Loading /> */}
+      {loading && <Loading />}
+      {/* loading only shown if it is loading
+      button is displayed only when not loading, when page is less than total pages */}
+      {state.page < state.total_pages && !loading && (
+        <Button text='Load More' onClick={() => setIsLoadingMore(true)} />
+      )}
     </>
   );
 };
