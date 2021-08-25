@@ -8,6 +8,7 @@ import Banner from './Banner';
 import MovieGrid from './MovieGrid';
 import Movie from './Movie';
 import Loading from './Loading';
+import SearchBar from './SearchBar';
 
 // hooks
 import { useHomeFetch } from '../hooks/useHomeFetch';
@@ -16,7 +17,7 @@ import { useHomeFetch } from '../hooks/useHomeFetch';
 import NoImage from '../images/no_image.jpg';
 
 const Home = () => {
-  const { state, loading, error } = useHomeFetch();
+  const { state, loading, error, setSearchTerm } = useHomeFetch();
 
   const movie = state.results[0];
 
@@ -29,6 +30,7 @@ const Home = () => {
           text={movie.overview}
         />
       }
+      <SearchBar setSearchTerm={setSearchTerm} />
       <MovieGrid title={'Popular Movies'}>
         {state.results.map((movie) => (
           <Movie

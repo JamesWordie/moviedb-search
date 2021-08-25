@@ -6,6 +6,10 @@ export const Wrapper = styled.div`
   height: 100px;
   background: var(--darkGrey);
   padding: 0 20px;
+
+  @media (max-width: 720px) {
+    height: 70px;
+  }
 `;
 
 export const Content = styled.div`
@@ -28,7 +32,7 @@ export const Content = styled.div`
   input {
     font-size: 28px;
     position: absolute;
-    left: 0px;
+    left: 0;
     margin: 8px 0;
     padding: 0 0 0 60px;
     border: 0;
@@ -37,12 +41,22 @@ export const Content = styled.div`
     height: 40px;
     color: var(--white);
 
+    // removes the outline from the input
     :focus {
       outline: none;
     }
+  }
 
-    @media (max-width: 720px) {
-      font-size: 28px;
+  @media (max-width: 720px) {
+    height: 45px;
+
+    img {
+      width: 20px;
+    }
+    input {
+      font-size: 20px;
+      height: 30px;
+      padding: 0 0 0 45px;
     }
   }
 `;
