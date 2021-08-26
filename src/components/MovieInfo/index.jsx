@@ -21,6 +21,7 @@ import { Context } from '../../context';
 const MovieInfo = ({ movie }) => {
   const [user] = useContext(Context);
 
+  console.log(user)
   const handleRating = async value => {
     const rate = await API.rateMovie(
       user.sessionId,

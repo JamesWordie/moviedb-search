@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // api
@@ -14,32 +14,49 @@ import { Wrapper } from './Login.styles';
 import { Context } from '../../context';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
   const [user, setUser] = useContext(Context);
   const navigate = useNavigate();
 
-  const handleInput = (e) => {
-    const name = e.currentTarget.name;
-    const value = e.currentTarget.value;
+  const query = window.location.search;
 
-    if (name === 'username') setUsername(value);
-    if (name === 'password') setPassword(value);
-  };
+  const handleSessionId = async () => {
+    const sessionId = await API.guestSessionId();
+
+    if (sessionId.success) {
+      setUser({ sessionId: sessionId.guest_session_id, username: 'Guest' });
+    }
+
+    navigate('/');
+  }
+
+  useEffect(() => {
+    if (query !== '') {
+      const requestToken = sessionStorage.getItem('requestToken');
+      handleSessionId(requestToken);
+    }
+  }, [query, navigate, setUser])
+
+  // const handleInput = (e) => {
+  //   const name = e.currentTarget.name;
+  //   const value = e.currentTarget.value;
+
+  //   if (name === 'username') setUsername(value);
+  //   if (name === 'password') setPassword(value);
+  // };
 
   const handleSubmit = async () => {
     setError(false);
     try {
       const requestToken = await API.getRequestToken();
-      const sessionId = await API.authenticate(
-        requestToken,
-        username,
-        password
+      await API.authenticateGuest(
+        requestToken
       );
 
-      setUser({ sessionId: sessionId.session_id, username, });
+      sessionStorage.setItem('requestToken', requestToken);
 
       navigate('/');
     } catch {
@@ -47,10 +64,11 @@ const Login = () => {
     }
   };
 
+  // old code remains for user login when its for my own account
   return (
     <Wrapper>
       {error && <div className="error">Error, invalid username or password!</div>}
-      <form>
+      {/* <form>
         <label>Username:</label>
         <input
           type='text'
@@ -67,7 +85,7 @@ const Login = () => {
           onChange={handleInput}
           autoComplete='off'
         />
-      </form>
+      </form> */}
       <Button text='Login' onClick={handleSubmit} />
     </Wrapper>
   );
