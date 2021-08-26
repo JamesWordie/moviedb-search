@@ -27,7 +27,7 @@ const MovieInfo = ({ movie }) => {
       movie.id,
       value
     );
-    console.log(rate);
+    // console.log(rate);
   }
 
   return (
