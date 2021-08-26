@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // api
@@ -21,6 +21,22 @@ const Login = () => {
   const [user, setUser] = useContext(Context);
   const navigate = useNavigate();
 
+  const query = window.location.search;
+
+  const handleSessionId = async () => {
+    await API.guestSessionId();
+  }
+  useEffect(() => {
+    if (query !== '') {
+      const requestToken = sessionStorage.getItem('requestToken');
+      const sessionId = handleSessionId(requestToken);
+
+      setUser({ sessionId: sessionId.session_id, username: 'Guest' });
+
+      navigate('/');
+    }
+  }, [query])
+
   const handleInput = (e) => {
     const name = e.currentTarget.name;
     const value = e.currentTarget.value;
@@ -33,13 +49,11 @@ const Login = () => {
     setError(false);
     try {
       const requestToken = await API.getRequestToken();
-      const sessionId = await API.authenticateGuest(
+      await API.authenticateGuest(
         requestToken
-        );
+      );
 
-      console.log(sessionId)
-
-      setUser({ sessionId: sessionId.session_id });
+      sessionStorage.setItem('requestToken', requestToken);
 
       navigate('/');
     } catch {

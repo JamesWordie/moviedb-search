@@ -71,10 +71,15 @@ const apiSettings = {
   },
   authenticateGuest: async (requestToken) => {
     // authenicate the requestToken
-    window.location.href(`https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=http://localhost:3000`);
+    window.open(`https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=http://localhost:3000/login`, '_self');
   },
-  guestSessionId: async () => {
-    const sessionId = await fetch(GUEST_SESSION_ID_URL).json();
+  guestSessionId: async (requestToken) => {
+    const sessionId = await (
+      await fetch(GUEST_SESSION_ID_URL, {
+        ...defaultConfig,
+        body: JSON.stringify({ request_token: requestToken })
+      })
+    ).json();
     return sessionId;
   },
   rateMovie: async (sessionId, movieId, value) => {
