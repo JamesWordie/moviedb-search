@@ -22,12 +22,12 @@ const MovieInfo = ({ movie }) => {
   const [user] = useContext(Context);
 
   const handleRating = async value => {
-    await API.rateMovie(
+    const rate = await API.rateMovie(
       user.sessionId,
       movie.id,
       value
     );
-    // console.log(rate);
+    return rate.success ? window.alert(`You rated the movie a ${value}/10.`) : null;
   }
 
   return (
