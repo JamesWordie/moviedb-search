@@ -63,7 +63,8 @@ const apiSettings = {
   },
   authenticateGuest: async (requestToken) => {
     // authenicate the requestToken
-    window.open(`https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=http://localhost:3000/login`, '_self');
+    const redirect = window.location.origin;
+    window.open(`https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${redirect}/login`, '_self');
   },
   guestSessionId: async (requestToken) => {
     const sessionId = await (
