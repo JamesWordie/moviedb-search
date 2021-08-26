@@ -18,7 +18,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
-  const [setUser] = useContext(Context);
+  const [user, setUser] = useContext(Context);
   const navigate = useNavigate();
 
   const handleInput = (e) => {
@@ -39,7 +39,6 @@ const Login = () => {
         password
       );
 
-      console.log(sessionId)
       setUser({ sessionId: sessionId.session_id, username, });
 
       navigate('/');
