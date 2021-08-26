@@ -5,7 +5,8 @@ import {
   API_KEY,
   REQUEST_TOKEN_URL,
   LOGIN_URL,
-  SESSION_ID_URL
+  SESSION_ID_URL,
+  GUEST_SESSION_ID_URL
 } from './config';
 
 const defaultConfig = {
@@ -30,10 +31,19 @@ const apiSettings = {
     const creditsEndpoint = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
     return await (await fetch(creditsEndpoint)).json();
   },
-  // Bonus material below for login
+  // Function below for login
   getRequestToken: async () => {
     const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json();
-    return reqToken.request_token;
+    const tokenData = reqToken.request_token;
+    return tokenData;
+    // const token = await sessionStorage.getItem('requestToken');
+    // if (!token || token === null) {
+    //   const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json();
+    //   const tokenData = reqToken.request_token;
+    //   sessionStorage.setItem('requestToken', tokenData)
+    //   return tokenData;
+    // }
+    // return token;
   },
   authenticate: async (requestToken, username, password) => {
     const bodyData = {
@@ -58,6 +68,14 @@ const apiSettings = {
       ).json();
       return sessionId;
     }
+  },
+  authenticateGuest: async (requestToken) => {
+    // authenicate the requestToken
+    window.location.href(`https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=http://localhost:3000`);
+  },
+  guestSessionId: async () => {
+    const sessionId = await fetch(GUEST_SESSION_ID_URL).json();
+    return sessionId;
   },
   rateMovie: async (sessionId, movieId, value) => {
     const endpoint = `${API_URL}movie/${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;

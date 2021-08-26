@@ -33,13 +33,13 @@ const Login = () => {
     setError(false);
     try {
       const requestToken = await API.getRequestToken();
-      const sessionId = await API.authenticate(
-        requestToken,
-        username,
-        password
-      );
+      const sessionId = await API.authenticateGuest(
+        requestToken
+        );
 
-      setUser({ sessionId: sessionId.session_id, username, });
+      console.log(sessionId)
+
+      setUser({ sessionId: sessionId.session_id });
 
       navigate('/');
     } catch {
