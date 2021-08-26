@@ -14,8 +14,8 @@ import { Wrapper } from './Login.styles';
 import { Context } from '../../context';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
   const [user, setUser] = useContext(Context);
@@ -24,26 +24,29 @@ const Login = () => {
   const query = window.location.search;
 
   const handleSessionId = async () => {
-    await API.guestSessionId();
+    const sessionId = await API.guestSessionId();
+
+    if (sessionId.success) {
+      setUser({ sessionId: sessionId.guest_session_id, username: 'Guest' });
+    }
+
+    navigate('/');
   }
+
   useEffect(() => {
     if (query !== '') {
       const requestToken = sessionStorage.getItem('requestToken');
-      const sessionId = handleSessionId(requestToken);
-
-      setUser({ sessionId: sessionId.session_id, username: 'Guest' });
-
-      navigate('/');
+      handleSessionId(requestToken);
     }
-  }, [query])
+  }, [query, navigate, setUser])
 
-  const handleInput = (e) => {
-    const name = e.currentTarget.name;
-    const value = e.currentTarget.value;
+  // const handleInput = (e) => {
+  //   const name = e.currentTarget.name;
+  //   const value = e.currentTarget.value;
 
-    if (name === 'username') setUsername(value);
-    if (name === 'password') setPassword(value);
-  };
+  //   if (name === 'username') setUsername(value);
+  //   if (name === 'password') setPassword(value);
+  // };
 
   const handleSubmit = async () => {
     setError(false);
@@ -64,7 +67,7 @@ const Login = () => {
   return (
     <Wrapper>
       {error && <div className="error">Error, invalid username or password!</div>}
-      <form>
+      {/* <form>
         <label>Username:</label>
         <input
           type='text'
@@ -81,7 +84,7 @@ const Login = () => {
           onChange={handleInput}
           autoComplete='off'
         />
-      </form>
+      </form> */}
       <Button text='Login' onClick={handleSubmit} />
     </Wrapper>
   );

@@ -36,14 +36,6 @@ const apiSettings = {
     const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json();
     const tokenData = reqToken.request_token;
     return tokenData;
-    // const token = await sessionStorage.getItem('requestToken');
-    // if (!token || token === null) {
-    //   const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json();
-    //   const tokenData = reqToken.request_token;
-    //   sessionStorage.setItem('requestToken', tokenData)
-    //   return tokenData;
-    // }
-    // return token;
   },
   authenticate: async (requestToken, username, password) => {
     const bodyData = {
@@ -83,7 +75,7 @@ const apiSettings = {
     return sessionId;
   },
   rateMovie: async (sessionId, movieId, value) => {
-    const endpoint = `${API_URL}movie/${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
+    const endpoint = `${API_URL}movie/${movieId}/rating?api_key=${API_KEY}&guest_session_id=${sessionId}`;
 
     const rating = await (
       await fetch(endpoint, {
