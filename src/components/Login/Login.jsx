@@ -51,20 +51,24 @@ const Login = () => {
   return (
     <Wrapper>
       {error && <div className="error">Error, invalid username or password!</div>}
-      <label>Username:</label>
-      <input
-        type='text'
-        value={username}
-        name='username'
-        onChange={handleInput}
-      />
-      <label>Password:</label>
-      <input
-        type='password'
-        value={password}
-        name='password'
-        onChange={handleInput}
-      />
+      <form>
+        <label>Username:</label>
+        <input
+          type='text'
+          value={username}
+          name='username'
+          onChange={handleInput}
+          // autoComplete='off'
+        />
+        <label>Password:</label>
+        <input
+          type='password'
+          value={password}
+          name='password'
+          onChange={handleInput}
+          autoComplete='off'
+        />
+      </form>
       <Button text='Login' onClick={handleSubmit} />
     </Wrapper>
   );
