@@ -57,7 +57,6 @@ const Login = () => {
           value={username}
           name='username'
           onChange={handleInput}
-          // autoComplete='off'
         />
         <label>Password:</label>
         <input
