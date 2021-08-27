@@ -21,7 +21,8 @@ const ThumbNail = ({ image, id, clickable, optionalPath }) => {
 
 ThumbNail.propTypes = {
   image: PropTypes.string,
-  movieId: PropTypes.number,
+  optionalPath: PropTypes.string,
+  id: PropTypes.number,
   clickable: PropTypes.bool
 }
 

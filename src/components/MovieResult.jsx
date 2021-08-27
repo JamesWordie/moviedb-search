@@ -28,7 +28,7 @@ const MovieResult = () => {
 
   return (
     <>
-      <BreadCrumb movieTitle={movie.original_title} />
+      <BreadCrumb title={movie.original_title} />
       <MovieInfo movie={movie} />
       <MovieInfoBar
         time={movie.runtime}

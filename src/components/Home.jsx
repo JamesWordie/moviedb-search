@@ -45,6 +45,7 @@ const Home = () => {
                 : NoImage
             }
             id={movie.id}
+            optionalPath=""
           />
         ))}
       </MovieGrid>

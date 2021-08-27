@@ -86,6 +86,14 @@ const apiSettings = {
     ).json();
 
     return rating;
+  },
+  fetchActor: async (actorId) => {
+    const endpoint = `${API_URL}person/${actorId}?api_key=${API_KEY}`;
+    return await (await fetch(endpoint)).json();
+  },
+  fetchActorMovies: async (actorId) => {
+    const endpoint = `${API_URL}person/${actorId}/movie_credits?api_key=${API_KEY}`;
+    return await (await fetch(endpoint)).json();
   }
 };
 

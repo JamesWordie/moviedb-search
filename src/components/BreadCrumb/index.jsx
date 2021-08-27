@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // style
 import { Wrapper, Content  } from '../BreadCrumb/BreadCrumb.styles';
 
-const BreadCrumb = ({ movieTitle }) => {
+const BreadCrumb = ({ title }) => {
   return (
     <Wrapper>
       <Content>
@@ -13,7 +13,7 @@ const BreadCrumb = ({ movieTitle }) => {
           <span>Home</span>
         </Link>
         <span>|</span>
-        <span>{movieTitle}</span>
+        <span>{title}</span>
       </Content>
     </Wrapper>
   );
