@@ -21,7 +21,7 @@ import { Context } from '../../context';
 const MovieInfo = ({ movie }) => {
   const [user] = useContext(Context);
 
-  console.log(user)
+  // console.log(user)
   const handleRating = async value => {
     const rate = await API.rateMovie(
       user.sessionId,
@@ -40,6 +40,7 @@ const MovieInfo = ({ movie }) => {
           }
           clickable={false}
           alt='movie-thumbnail'
+          optionalPath=""
         />
         <Text>
           <h1>{movie.title}</h1>

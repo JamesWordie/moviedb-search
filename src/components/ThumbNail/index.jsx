@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 // styles
 import { Image } from './ThumbNail.styles';
 
-const ThumbNail = ({ image, movieId, clickable }) => {
+const ThumbNail = ({ image, id, clickable, optionalPath }) => {
   return (
     <div>
       {clickable ? (
-        <Link to={`/${movieId}`} >
+        <Link to={`${optionalPath}/${id}`} >
           <Image src={image} alt="movie thumbnail" />
         </Link>
       ) : (
@@ -21,7 +21,8 @@ const ThumbNail = ({ image, movieId, clickable }) => {
 
 ThumbNail.propTypes = {
   image: PropTypes.string,
-  movieId: PropTypes.number,
+  optionalPath: PropTypes.string,
+  id: PropTypes.number,
   clickable: PropTypes.bool
 }
 
