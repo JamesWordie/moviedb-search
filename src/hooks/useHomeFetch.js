@@ -42,14 +42,6 @@ export const useHomeFetch = () => {
   // initial render and search
   useEffect(() => {
     // if not in a search then search to sessionstorage
-    if (!visited) {
-      const beenVisited = isPersistedState('visited');
-
-      if (beenVisited) {
-        setVisited(true);
-      }
-    }
-
     if (!searchTerm) {
       const sessionState = isPersistedState('homeState');
 
@@ -60,7 +52,7 @@ export const useHomeFetch = () => {
     }
     setState(initialState);
     fetchMovies(1, searchTerm);
-  }, [searchTerm, visited]) //dependency array trigger on home component mount and when searchTerm changes
+  }, [searchTerm]) //dependency array trigger on home component mount and when searchTerm changes
 
   // load more movies
   useEffect(() => {
@@ -80,8 +72,15 @@ export const useHomeFetch = () => {
 
   // useEffect to deal with the information alert
   useEffect(() => {
-    if (!visited) return;
-      sessionStorage.setItem('visited', JSON.stringify(true));
+    if (!visited) {
+      const beenVisited = isPersistedState('visited');
+
+      if (beenVisited) {
+        setVisited(true);
+      };
+    }
+
+    sessionStorage.setItem('visited', JSON.stringify(true));
   }, [visited]);
 
   return { state, loading, error, searchTerm, visited, setSearchTerm, setIsLoadingMore, setVisited };
