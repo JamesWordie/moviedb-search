@@ -25,7 +25,7 @@ const App = () => {
             <Route path="/" exact element={<Home />} />
             <Route path='/login' exact element={<Login />} />
             <Route path="/:movieId" exact element={<MovieResult />} />
-            <Route path="/actor/:actorId" exact element={<ActorResult /> } />
+            <Route path="/actor/:actorId" exact element={<ActorResult />} />
             <Route path="/*" exact element={<NotFound />} />
             {/* asterisk after the slash returns a not found ie a 404 page */}
           </Routes>
