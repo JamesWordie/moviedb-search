@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 
 // Images
 import AppLogo from '../../images/react-movie-logo.svg';
-import MovieLogo from '../../images/tmdb_logo.svg';
 
 // Style
-import { Wrapper, Content, LogoImg, TMDBLogoImg } from './Header.styles';
+import { Wrapper, Content, LogoImg } from './Header.styles';
 
 // Context
 import { Context } from '../../context';
@@ -34,7 +33,6 @@ const Header = () => {
             ) : (
             <Link to='/login'><span className="login">Log In</span></Link>
           )}
-          {/* <TMDBLogoImg src={MovieLogo} alt="moviedb-logo" /> */}
         </div>
       </Content>
     </Wrapper>

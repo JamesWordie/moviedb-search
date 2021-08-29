@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     --fontBig: 1.5rem;
     --fontMed: 1.2rem;
     --fontSmall: 1.0rem;
+    --jamesBlue: rgb(69, 123, 157);
   }
 
   * {

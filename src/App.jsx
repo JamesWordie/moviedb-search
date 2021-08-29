@@ -11,6 +11,7 @@ import MovieResult from './components/MovieResult';
 import NotFound from './components/NotFound';
 import Login from './components/Login/Login';
 import ActorResult from './components/ActorResult';
+import Footer from './components/Footer';
 
 // Context
 import UserProvider from './context';
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/*" exact element={<NotFound />} />
             {/* asterisk after the slash returns a not found ie a 404 page */}
           </Routes>
+          <Footer />
           <GlobalStyle />
         </div>
       </UserProvider>
