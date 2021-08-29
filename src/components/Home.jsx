@@ -10,6 +10,7 @@ import ThumbNail from './ThumbNail';
 import Loading from './Loading';
 import SearchBar from './SearchBar';
 import Button from './Button';
+import Alert from './Alert';
 
 // Hooks
 import { useHomeFetch } from '../hooks/useHomeFetch';
@@ -18,7 +19,7 @@ import { useHomeFetch } from '../hooks/useHomeFetch';
 import NoImage from '../images/no_image.jpg';
 
 const Home = () => {
-  const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useHomeFetch();
+  const { state, loading, error, searchTerm, visited, setSearchTerm, setIsLoadingMore, setVisited } = useHomeFetch();
 
   const movie = state.results[0];
 
@@ -26,6 +27,9 @@ const Home = () => {
 
   return (
     <>
+      {!visited && <Alert text="Login with a guest account to rate movies."
+        onClick={() => setVisited(true)}
+      />}
       {!searchTerm && movie &&
         <Banner
           image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${movie.backdrop_path}`}
