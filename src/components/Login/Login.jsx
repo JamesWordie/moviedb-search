@@ -30,11 +30,8 @@ const Login = () => {
     if (sessionId.success) {
       setAuthenticateGuest(true);
       setUser({ sessionId: sessionId.guest_session_id, username: 'Guest' });
-      console.log('session in if')
     }
-    console.log('session out if')
 
-    // setAuthenticateGuest(false);
     navigate('/');
   }
 
@@ -43,11 +40,8 @@ const Login = () => {
       setAuthenticateGuest(true);
       const requestToken = sessionStorage.getItem('requestToken');
       handleSessionId(requestToken);
-      console.log('UE in if')
     }
-    console.log('UE in if')
-    // setAuthenticateGuest(false);
-  }, [url])
+  }, [url]);
 
   // const handleInput = (e) => {
   //   const name = e.currentTarget.name;
