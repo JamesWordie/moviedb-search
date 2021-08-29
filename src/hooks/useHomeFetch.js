@@ -60,7 +60,7 @@ export const useHomeFetch = () => {
     }
     setState(initialState);
     fetchMovies(1, searchTerm);
-  }, [searchTerm]) //dependency array trigger on home component mount and when searchTerm changes
+  }, [searchTerm, visited]) //dependency array trigger on home component mount and when searchTerm changes
 
   // load more movies
   useEffect(() => {

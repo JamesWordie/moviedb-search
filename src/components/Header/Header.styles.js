@@ -43,13 +43,18 @@ export const Content = styled.div`
     props.user
     ? 'space-between'
     : 'flex-end'};
+
+    @media (max-width: 500px) {
+      width: fit-content;
+    }
   }
+
 `;
 
 export const LogoImg = styled.img`
   width: 150px;
 
   @media (max-width: 500px) {
-    width: 150px;
+    width: 120px;
   }
 `;
