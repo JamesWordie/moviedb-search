@@ -10,7 +10,7 @@ export const Content = styled.div`
   align-items: center;
   justify-content: space-between;
   max-width: var(--maxWidth);
-  padding: 20px 0;
+  padding: 15px 0;
   margin: 0 auto;
   color: var(--white);
 
@@ -18,7 +18,7 @@ export const Content = styled.div`
     font-size: var(--fontSmall);
   }
 
-  .login {
+  .login, .logout {
     border-radius: 20px;
     padding: 10px;
     border: 2px solid var(--white);
@@ -28,6 +28,7 @@ export const Content = styled.div`
   a {
     color: var(--white);
     text-decoration: none;
+    padding: 10px;
   }
 
   a:hover {
@@ -38,7 +39,10 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     width: 25%;
-    justify-content: space-between;
+    justify-content: ${(props) =>
+    props.user
+    ? 'space-between'
+    : 'flex-end'};
   }
 `;
 

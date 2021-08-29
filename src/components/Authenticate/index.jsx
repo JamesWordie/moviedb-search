@@ -3,9 +3,6 @@ import React from 'react';
 // Components
 import Loading from '../Loading';
 
-// Style
-// import { Wrapper } from './Authenticate.styles';
-
 const Authenticate = () => {
   return (
     <>
