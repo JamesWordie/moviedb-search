@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// style
+// Styles
 import { GlobalStyle } from './GlobalStyle';
 
-// components
+// Components
 import Header from './components/Header';
 import Home from './components/Home';
 import MovieResult from './components/MovieResult';
@@ -12,7 +12,7 @@ import NotFound from './components/NotFound';
 import Login from './components/Login/Login';
 import ActorResult from './components/ActorResult';
 
-// context
+// Context
 import UserProvider from './context';
 
 const App = () => {
