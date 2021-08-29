@@ -9,17 +9,18 @@ export const Wrapper = styled.div`
   max-width: 350px;
   padding: 20px;
   color: var(--darkGrey);
+  height: 100vh;
 
-  input {
+  /* input {
     width: 100%;
     height: 30px;
     border: 1px solid var(--darkGrey);
     border-radius: 20px;
     margin: 10px 0;
     padding: 10px;
-  }
+  } */
 
-  .error {
+  /* .error {
     text-align: center;
     width: 100%;
     background-color: tomato;
@@ -38,5 +39,5 @@ export const Wrapper = styled.div`
       font-size: var(--fontSmall);
       height: 40px;
     }
-  }
+  } */
 `;

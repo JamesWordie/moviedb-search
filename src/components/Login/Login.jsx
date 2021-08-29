@@ -1,44 +1,53 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// api
+// Api
 import API from '../../API';
 
-// components
+// Components
 import Button from '../Button';
+import Authenticate from '../Authenticate';
 
-// style
+// Style
 import { Wrapper } from './Login.styles';
 
-// context
+// Context
 import { Context } from '../../context';
 
 const Login = () => {
   // const [username, setUsername] = useState('');
   // const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
-
-  const [user, setUser] = useContext(Context);
+  const [authenticateGuest, setAuthenticateGuest] = useState(false);
+  const [_user, setUser] = useContext(Context);
   const navigate = useNavigate();
 
-  const query = window.location.search;
+  const url = window.location.search;
 
   const handleSessionId = async () => {
     const sessionId = await API.guestSessionId();
 
     if (sessionId.success) {
+      setAuthenticateGuest(true);
       setUser({ sessionId: sessionId.guest_session_id, username: 'Guest' });
+      console.log('session in if')
     }
+    console.log('session out if')
 
+    // setAuthenticateGuest(false);
     navigate('/');
   }
 
   useEffect(() => {
-    if (query !== '') {
+    if (url !== '') {
+      setAuthenticateGuest(true);
       const requestToken = sessionStorage.getItem('requestToken');
       handleSessionId(requestToken);
+      console.log('UE in if')
     }
-  }, [query, navigate, setUser])
+    console.log('UE in if')
+    // setAuthenticateGuest(false);
+  }, [url])
 
   // const handleInput = (e) => {
   //   const name = e.currentTarget.name;
@@ -58,7 +67,7 @@ const Login = () => {
 
       sessionStorage.setItem('requestToken', requestToken);
 
-      navigate('/');
+      setAuthenticateGuest(true);
     } catch {
       setError(true);
     }
@@ -86,7 +95,9 @@ const Login = () => {
           autoComplete='off'
         />
       </form> */}
+      {!authenticateGuest ?
       <Button text='Login' onClick={handleSubmit} />
+      : <Authenticate />}
     </Wrapper>
   );
 }
