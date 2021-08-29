@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Styles
 import { Wrapper, Content, Button } from './Alert.styles';
 
-const Alert = ({ text }) => {
-  const [visited, setVisited] = useState(false);
-
-  const handleClick = () => {
-    setVisited(true);
-  }
-
+const Alert = ({ text, onClick }) => {
   return (
-    <Wrapper visible={visited}>
+    <Wrapper onClick={onClick}>
       <Content>
         <p>{text}</p>
-        <Button onClick={handleClick}>X</Button>
+        <Button>X</Button>
       </Content>
     </Wrapper>
   );

@@ -19,6 +19,7 @@ export const useHomeFetch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [visited, setVisited] = useState(false);
 
   const fetchMovies = async (page, searchTerm = "") => {
     try {
@@ -41,6 +42,14 @@ export const useHomeFetch = () => {
   // initial render and search
   useEffect(() => {
     // if not in a search then search to sessionstorage
+    if (!visited) {
+      const beenVisited = isPersistedState('visited');
+
+      if (beenVisited) {
+        setVisited(true);
+      }
+    }
+
     if (!searchTerm) {
       const sessionState = isPersistedState('homeState');
 
@@ -60,14 +69,20 @@ export const useHomeFetch = () => {
     fetchMovies(state.page + 1, searchTerm);
     setIsLoadingMore(false);
 
-  }, [isLoadingMore, state.page, searchTerm])
+  }, [isLoadingMore, state.page, searchTerm]);
 
   // write to sessionStorage
   useEffect(() => {
     if (!searchTerm) {
       sessionStorage.setItem('homeState', JSON.stringify(state));
     }
-  }, [searchTerm, state])
+  }, [searchTerm, state]);
 
-  return { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore };
+  // useEffect to deal with the information alert
+  useEffect(() => {
+    if (!visited) return;
+      sessionStorage.setItem('visited', JSON.stringify(true));
+  }, [visited]);
+
+  return { state, loading, error, searchTerm, visited, setSearchTerm, setIsLoadingMore, setVisited };
 };

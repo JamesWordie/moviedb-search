@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Config
 import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
@@ -19,7 +19,7 @@ import { useHomeFetch } from '../hooks/useHomeFetch';
 import NoImage from '../images/no_image.jpg';
 
 const Home = () => {
-  const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useHomeFetch();
+  const { state, loading, error, searchTerm, visited, setSearchTerm, setIsLoadingMore, setVisited } = useHomeFetch();
 
   const movie = state.results[0];
 
@@ -27,7 +27,9 @@ const Home = () => {
 
   return (
     <>
-      <Alert text="Login with a guest account to rate movies." />
+      {!visited && <Alert text="Login with a guest account to rate movies."
+        onClick={() => setVisited(true)}
+      />}
       {!searchTerm && movie &&
         <Banner
           image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${movie.backdrop_path}`}
