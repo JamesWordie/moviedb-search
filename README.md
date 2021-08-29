@@ -19,5 +19,6 @@
 ## Future Features & Improvements
 * Test coverage over the app, using sypress or another testing framework **Testing**.
 * Rework the guest user sign in flow as poor UX/UI.
+* Improved error handling, to alert the user of problems rather than just console messages and setting the state.
 
 Thanks.
