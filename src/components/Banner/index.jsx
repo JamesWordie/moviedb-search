@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// styles
+// Styles
 import { Wrapper, Content, Text } from '../Banner/Banner.styles';
 
 const Banner = ({ image, title, text }) => {

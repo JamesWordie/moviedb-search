@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// style
+// Styles
 import { Wrapper, Content, Text } from '../MovieInfo/MovieInfo.styles';
 
-// config
+// Config
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config';
 
-// components
+// Components
 import ThumbNail from '../ThumbNail';
 import Button from '../Button';
 
-// image
+// Images
 import NoImage from '../../images/no_image.jpg';
 
 const ActorInfo = ({ actor }) => {
-  console.log(actor)
-
   const handleClick = () => {
     window.open(`https://www.imdb.com/name/${actor.imdb_id}`);
   }
@@ -41,6 +39,10 @@ const ActorInfo = ({ actor }) => {
       </Content>
     </Wrapper>
   );
+}
+
+ActorInfo.propTypes = {
+  actor: PropTypes.object
 }
 
 export default ActorInfo;

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// style
+// Styles
 import { Wrapper } from './Actor.styles';
 
-// component
+// Components
 import ThumbNail from '../ThumbNail';
 
 const Actor = ({ name, character, imageUrl, actorId }) => {

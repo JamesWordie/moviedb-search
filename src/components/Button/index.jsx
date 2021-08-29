@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// style
+// Styles
 import { Wrapper } from './Button.styles';
 
 const Button = ({ text, onClick }) => {

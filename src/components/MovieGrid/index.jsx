@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// styles
+// Styles
 import { Wrapper, Content } from './MovieGrid.styles';
 
 const MovieGrid = ({ title, children }) => {

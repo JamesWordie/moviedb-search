@@ -2,26 +2,25 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import API from '../../API';
 
-// style
+// Styles
 import { Wrapper, Content, Text } from './MovieInfo.styles';
 
-// config
+// Config
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config';
 
-// component
+// Components
 import ThumbNail from '../ThumbNail';
 import Rate from '../Rate';
 
-// image
+// Images
 import NoImage from '../../images/no_image.jpg';
 
-// context
+// Context
 import { Context } from '../../context';
 
 const MovieInfo = ({ movie }) => {
   const [user] = useContext(Context);
 
-  // console.log(user)
   const handleRating = async value => {
     const rate = await API.rateMovie(
       user.sessionId,

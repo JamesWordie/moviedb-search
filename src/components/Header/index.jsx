@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-// images
+// Images
 import AppLogo from '../../images/react-movie-logo.svg';
 import MovieLogo from '../../images/tmdb_logo.svg';
 
-// style
+// Style
 import { Wrapper, Content, LogoImg, TMDBLogoImg } from './Header.styles';
 
-// context
+// Context
 import { Context } from '../../context';
 
 const Header = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-// style
+// Styles
 import { Wrapper, Content } from './Rate.styles';
 
 const Rate = ({ onClick }) => {

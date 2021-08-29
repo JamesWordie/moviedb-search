@@ -1,9 +1,9 @@
 import React from 'react';
 
-// config
+// Config
 import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
 
-// components
+// Components
 import Banner from './Banner';
 import MovieGrid from './MovieGrid';
 import ThumbNail from './ThumbNail';
@@ -11,10 +11,10 @@ import Loading from './Loading';
 import SearchBar from './SearchBar';
 import Button from './Button';
 
-// hooks
+// Hooks
 import { useHomeFetch } from '../hooks/useHomeFetch';
 
-// images
+// Images
 import NoImage from '../images/no_image.jpg';
 
 const Home = () => {
