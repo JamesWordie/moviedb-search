@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-// config
+// Config
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../config';
 
-// components
+// Components
 import MovieGrid from './MovieGrid';
 import Loading from './Loading';
 import BreadCrumb from './BreadCrumb';
@@ -12,10 +12,10 @@ import MovieInfo from './MovieInfo';
 import MovieInfoBar from './MovieInfoBar';
 import Actor from './Actor';
 
-// hooks
+// Hooks
 import { useMovieFetch } from '../hooks/useMovieFetch';
 
-// image
+// Images
 import NoImage from '../images/no_image.jpg';
 
 const MovieResult = () => {

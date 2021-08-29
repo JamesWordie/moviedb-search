@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// style
+// Styles
 import { Wrapper, Content } from './MovieInfoBar.styles';
 
-// helpers
+// Helpers
 import { calcTime, convertMoney } from '../../helpers';
 
 const MovieInfoBar = ({ time, budget, revenue }) => {

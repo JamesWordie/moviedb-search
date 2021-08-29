@@ -1,19 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-// image
+// Images
 import searchIcon from '../../images/search-icon.svg';
 
-// style
+// Styles
 import { Wrapper, Content } from '../SearchBar/SearchBar.styles';
 
 const SearchBar = ({ setSearchTerm }) => {
   const [state, setState] = useState('');
   const initial = useRef(true); // creates a mutable value DOES NOT TRIGGER RE-RENDER
-
-  // const onChange = (e) => {
-
-  // }
 
   useEffect(() => {
     // skips initial render of useEffect

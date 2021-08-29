@@ -8,7 +8,7 @@ import API from '../../API';
 import Button from '../Button';
 import Authenticate from '../Authenticate';
 
-// Style
+// Styles
 import { Wrapper } from './Login.styles';
 
 // Context

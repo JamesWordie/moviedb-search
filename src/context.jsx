@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export const Context = React.createContext();
 
-// setting up a global context and state that the application can access
+// Setting up a global context and state that the application can access
 const UserProvider = ({ children }) => {
   const [state, setState] = useState(undefined);
 

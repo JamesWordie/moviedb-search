@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-// images
+// Images
 import AppLogo from '../../images/react-movie-logo.svg';
-import MovieLogo from '../../images/tmdb_logo.svg';
 
-// style
-import { Wrapper, Content, LogoImg, TMDBLogoImg } from './Header.styles';
+// Style
+import { Wrapper, Content, LogoImg } from './Header.styles';
 
-// context
+// Context
 import { Context } from '../../context';
 
 const Header = () => {
@@ -34,7 +33,6 @@ const Header = () => {
             ) : (
             <Link to='/login'><span className="login">Log In</span></Link>
           )}
-          {/* <TMDBLogoImg src={MovieLogo} alt="moviedb-logo" /> */}
         </div>
       </Content>
     </Wrapper>
