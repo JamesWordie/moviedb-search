@@ -11,6 +11,7 @@ import Loading from './Loading';
 import SearchBar from './SearchBar';
 import Button from './Button';
 import Alert from './Alert';
+import ErrorDiv from './ErrorDiv';
 
 // Hooks
 import { useHomeFetch } from '../hooks/useHomeFetch';
@@ -30,6 +31,7 @@ const Home = () => {
       {!visited && <Alert text="Login with a guest account to rate movies."
         onClick={() => setVisited(true)}
       />}
+
       {!searchTerm && movie &&
         <Banner
           image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${movie.backdrop_path}`}
@@ -38,6 +40,11 @@ const Home = () => {
         />
       }
       <SearchBar setSearchTerm={setSearchTerm} />
+
+      {state.results.length === 0 &&
+      <ErrorDiv text={`Your search for ${searchTerm} didn't return any results.`} />}
+
+      {state.results.length !== 0 &&
       <MovieGrid title={searchTerm ? 'Search Results' : 'Popular Movies'}>
         {state.results.map((movie) => (
           <ThumbNail
@@ -52,7 +59,8 @@ const Home = () => {
             optionalPath=""
           />
         ))}
-      </MovieGrid>
+      </MovieGrid>}
+
       {loading && <Loading />}
       {/* loading only shown if it is loading
       button is displayed only when not loading, when page is less than total pages */}

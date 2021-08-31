@@ -28,6 +28,8 @@ export const useHomeFetch = () => {
 
       const movies = await API.fetchMovies(searchTerm, page);
 
+      console.log(movies)
+
       setState(previous => ({
         ...movies,
         results:
