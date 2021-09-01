@@ -64,7 +64,7 @@ const Home = () => {
       </MovieGrid>}
 
       {state.results.length === 0 && !loading &&
-      <ErrorDiv text={`Your search for ${searchTerm} didn't return any results. Try again.`} />}
+      <ErrorDiv text={`Your search for ${searchTerm} didn't return any results. Please try again.`} />}
 
       {loading && <Loading />}
       {/* loading only shown if it is loading
