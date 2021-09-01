@@ -28,7 +28,11 @@ export const useHomeFetch = () => {
 
       const movies = await API.fetchMovies(searchTerm, page);
 
-      console.log(movies)
+      if (movies.results.length === 0) {
+        setTimeout(() => {
+          setSearchTerm('');
+        }, 5000)
+      }
 
       setState(previous => ({
         ...movies,

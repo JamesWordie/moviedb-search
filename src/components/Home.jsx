@@ -41,25 +41,25 @@ const Home = () => {
       }
       <SearchBar setSearchTerm={setSearchTerm} />
 
-      {state.results.length === 0 &&
-      <ErrorDiv text={`Your search for ${searchTerm} didn't return any results.`} />}
-
       {state.results.length !== 0 &&
       <MovieGrid title={searchTerm ? 'Search Results' : 'Popular Movies'}>
         {state.results.map((movie) => (
           <ThumbNail
-            key={Math.random() * movie.id}
-            clickable
-            image={
-              movie.poster_path
-                ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
-                : NoImage
-            }
-            id={movie.id}
-            optionalPath=""
+          key={Math.random() * movie.id}
+          clickable
+          image={
+            movie.poster_path
+            ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+            : NoImage
+          }
+          id={movie.id}
+          optionalPath=""
           />
-        ))}
+          ))}
       </MovieGrid>}
+
+      {state.results.length === 0 && !loading &&
+      <ErrorDiv text={`Your search for ${searchTerm} didn't return any results. Try again.`} />}
 
       {loading && <Loading />}
       {/* loading only shown if it is loading
