@@ -18,6 +18,7 @@ import { useHomeFetch } from '../hooks/useHomeFetch';
 
 // Images
 import NoImage from '../images/no_image.jpg';
+import BreadCrumb from './BreadCrumb';
 
 const Home = () => {
   const { state, loading, error, searchTerm, visited, setSearchTerm, setIsLoadingMore, setVisited } = useHomeFetch();
@@ -39,6 +40,10 @@ const Home = () => {
           text={movie.overview}
         />
       }
+
+      {searchTerm && state.results.length !== 0 &&
+      <BreadCrumb title={searchTerm} />}
+
       <SearchBar setSearchTerm={setSearchTerm} />
 
       {state.results.length !== 0 &&

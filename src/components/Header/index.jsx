@@ -9,19 +9,17 @@ import { Wrapper, Content, LogoImg } from './Header.styles';
 
 // Context
 import { Context } from '../../context';
-
 const Header = () => {
   const [user, setUser] = useContext(Context);
 
   const handleClick = () => {
     setUser(undefined);
-    console.log(user)
   }
 
   return (
     <Wrapper>
       <Content user={user}>
-        <Link to='/'>
+        <Link to={'/'}>
           <LogoImg src={AppLogo} alt="app-logo" />
         </Link>
         <div className="group">

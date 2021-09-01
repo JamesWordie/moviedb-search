@@ -26,8 +26,6 @@ export const useActorFetch = actorId => {
 
         topMovies = topMovies.length > 20 ? topMovies.slice(0,19) : topMovies;
 
-        console.log(topMovies)
-
         setState({
           ...actor,
           movies: topMovies

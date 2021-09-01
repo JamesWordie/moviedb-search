@@ -28,7 +28,9 @@ const Actor = ({ name, character, imageUrl, actorId, movieId }) => {
 Actor.propTypes = {
   name: PropTypes.string,
   character: PropTypes.string,
-  imageUrl: PropTypes.string
+  imageUrl: PropTypes.string,
+  actorId: PropTypes.number,
+  movieId: PropTypes.number
 }
 
 export default Actor;
