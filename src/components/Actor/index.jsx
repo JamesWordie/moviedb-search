@@ -7,7 +7,7 @@ import { Wrapper } from './Actor.styles';
 // Components
 import ThumbNail from '../ThumbNail';
 
-const Actor = ({ name, character, imageUrl, actorId }) => {
+const Actor = ({ name, character, imageUrl, actorId, movieId }) => {
   // checks to see if the page is the actor's page, if so disable clickable below
   const actorPage = window.location.href.includes('actor');
 
@@ -15,9 +15,9 @@ const Actor = ({ name, character, imageUrl, actorId }) => {
     <Wrapper>
       <ThumbNail
         image={imageUrl}
-        clickable={actorPage ? false : true}
-        id={actorId}
-        optionalPath="/actor"
+        clickable
+        id={actorPage ? movieId : actorId}
+        optionalPath={actorPage ? "" : "/actor"}
       />
       <h3>{name}</h3>
       <p>{character}</p>
@@ -28,7 +28,9 @@ const Actor = ({ name, character, imageUrl, actorId }) => {
 Actor.propTypes = {
   name: PropTypes.string,
   character: PropTypes.string,
-  imageUrl: PropTypes.string
+  imageUrl: PropTypes.string,
+  actorId: PropTypes.number,
+  movieId: PropTypes.number
 }
 
 export default Actor;

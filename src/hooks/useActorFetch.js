@@ -24,9 +24,7 @@ export const useActorFetch = actorId => {
           (a, b) => a.vote_average >= b.vote_average
         );
 
-        topMovies = topMovies.length > 20 ? topMovies.slice(0,19) : topMovies
-
-        console.log(topMovies)
+        topMovies = topMovies.length > 20 ? topMovies.slice(0,19) : topMovies;
 
         setState({
           ...actor,

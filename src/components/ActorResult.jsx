@@ -34,6 +34,7 @@ const ActorResult = () => {
           <Actor
             key={movie.id}
             name={movie.title}
+            movieId={movie.id}
             character={movie.character}
             imageUrl={movie.poster_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
             : NoImage
