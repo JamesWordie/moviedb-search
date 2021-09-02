@@ -9,6 +9,7 @@ import { Wrapper, Content, LogoImg } from './Header.styles';
 
 // Context
 import { Context } from '../../context';
+
 const Header = () => {
   const [user, setUser] = useContext(Context);
 
