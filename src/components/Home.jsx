@@ -20,8 +20,7 @@ import { useHomeFetch } from '../hooks/useHomeFetch';
 import NoImage from '../images/no_image.jpg';
 import BreadCrumb from './BreadCrumb';
 
-const Home = (props) => {
-  console.log(props)
+const Home = () => {
   const { state, loading, error, searchTerm, visited, setSearchTerm, setIsLoadingMore, setVisited } = useHomeFetch();
 
   const movie = state.results[0];
