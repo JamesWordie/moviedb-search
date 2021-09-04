@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 // Api
 import API from '../API';
 
 // Helpers
 import { isPersistedState } from '../helpers';
+
+// Context
+import { SearchContext } from '../searchContext';
 
 const initialState = {
   page: 0,
@@ -14,12 +17,16 @@ const initialState = {
 };
 
 export const useHomeFetch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [state, setState] = useState(initialState);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [visited, setVisited] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(''); //searchTerm
+  const [state, setState] = useState(initialState); // movies
+  const [loading, setLoading] = useState(false); // loading
+  const [error, setError] = useState(false); // errors
+  const [isLoadingMore, setIsLoadingMore] = useState(false); // loading more
+  const [visited, setVisited] = useState(false); // page visited info popup
+
+console.log(useContext(SearchContext));
+  const { homeState } = useContext(SearchContext);
+console.log(homeState);
 
   const fetchMovies = async (page, searchTerm = "") => {
     try {
@@ -28,6 +35,7 @@ export const useHomeFetch = () => {
 
       const movies = await API.fetchMovies(searchTerm, page);
 
+      // revert to popular movies if no results
       if (movies.results.length === 0) {
         setTimeout(() => {
           setSearchTerm('');
