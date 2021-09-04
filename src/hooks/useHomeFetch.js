@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 import API from '../API';
 
 // Helpers
-import { isPersistedState } from '../helpers';
+import { isEmptyObject } from '../helpers';
 
 // Context
 import { SearchContext } from '../searchContext';
@@ -22,11 +22,9 @@ export const useHomeFetch = () => {
   const [loading, setLoading] = useState(false); // loading
   const [error, setError] = useState(false); // errors
   const [isLoadingMore, setIsLoadingMore] = useState(false); // loading more
-  const [visited, setVisited] = useState(false); // page visited info popup
 
-console.log(useContext(SearchContext));
   const { homeState } = useContext(SearchContext);
-console.log(homeState);
+// console.log(homeState);s
 
   const fetchMovies = async (page, searchTerm = "") => {
     try {
@@ -57,16 +55,17 @@ console.log(homeState);
   useEffect(() => {
     // if not in a search then search to sessionstorage
     if (!searchTerm) {
-      const sessionState = isPersistedState('homeState');
+      // const sessionState = isPersistedState('homeState');
+      const home = isEmptyObject(homeState);
 
-      if (sessionState) {
-        setState(sessionState);
+      if (!home) {
+        setState(homeState);
         return;
       }
     }
     setState(initialState);
     fetchMovies(1, searchTerm);
-  }, [searchTerm]) //dependency array trigger on home component mount and when searchTerm changes
+  }, [searchTerm, homeState]) //dependency array trigger on home component mount and when searchTerm changes
 
   // load more movies
   useEffect(() => {
@@ -77,25 +76,5 @@ console.log(homeState);
 
   }, [isLoadingMore, state.page, searchTerm]);
 
-  // write to sessionStorage
-  useEffect(() => {
-    if (!searchTerm) {
-      sessionStorage.setItem('homeState', JSON.stringify(state));
-    }
-  }, [searchTerm, state]);
-
-  // useEffect to deal with the information alert
-  useEffect(() => {
-    if (!visited) {
-      const beenVisited = isPersistedState('visited');
-
-      if (beenVisited) {
-        setVisited(true);
-      };
-    }
-
-    sessionStorage.setItem('visited', JSON.stringify(true));
-  }, [visited]);
-
-  return { state, loading, error, searchTerm, visited, setSearchTerm, setIsLoadingMore, setVisited };
+  return { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore };
 };

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 // Config
 import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
+
+// Context
+import { SearchContext } from '../searchContext';
 
 // Components
 import Banner from './Banner';
@@ -21,7 +24,8 @@ import NoImage from '../images/no_image.jpg';
 import BreadCrumb from './BreadCrumb';
 
 const Home = () => {
-  const { state, loading, error, searchTerm, visited, setSearchTerm, setIsLoadingMore, setVisited } = useHomeFetch();
+  const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useHomeFetch();
+  const { visited, setVisited } = useContext(SearchContext);
 
   const movie = state.results[0];
 

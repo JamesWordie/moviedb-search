@@ -5,6 +5,7 @@ export const SearchContext = React.createContext();
 const SearchProvider = ({ children }) => {
   const [movies, setMovies] = useState({});
   const [actors, setActors] = useState({});
+  const [visited, setVisited] = useState(false);
   const homeState = {};
 
   const contextValues = {
@@ -12,6 +13,8 @@ const SearchProvider = ({ children }) => {
     setMovies,
     actors,
     setActors,
+    visited,
+    setVisited,
     homeState
   }
 
