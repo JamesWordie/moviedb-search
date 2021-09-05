@@ -23,8 +23,10 @@ export const useHomeFetch = () => {
   const [error, setError] = useState(false); // errors
   const [isLoadingMore, setIsLoadingMore] = useState(false); // loading more
 
-  const { homeState } = useContext(SearchContext);
-// console.log(homeState);s
+  const { homeState, setHomeState } = useContext(SearchContext);
+
+  console.log(state)
+
 
   const fetchMovies = async (page, searchTerm = "") => {
     try {

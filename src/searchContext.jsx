@@ -6,7 +6,7 @@ const SearchProvider = ({ children }) => {
   const [movies, setMovies] = useState({});
   const [actors, setActors] = useState({});
   const [visited, setVisited] = useState(false);
-  const homeState = {};
+  const [homeState, setHomeState] = useState({});
 
   const contextValues = {
     movies,
@@ -15,7 +15,8 @@ const SearchProvider = ({ children }) => {
     setActors,
     visited,
     setVisited,
-    homeState
+    homeState,
+    setHomeState
   }
 
   return (
