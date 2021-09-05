@@ -23,10 +23,7 @@ export const useHomeFetch = () => {
   const [error, setError] = useState(false); // errors
   const [isLoadingMore, setIsLoadingMore] = useState(false); // loading more
 
-  const { homeState, setHomeState } = useContext(SearchContext);
-
-  console.log(state)
-
+  const { homeState } = useContext(SearchContext);
 
   const fetchMovies = async (page, searchTerm = "") => {
     try {
@@ -55,9 +52,10 @@ export const useHomeFetch = () => {
 
   // initial render and search
   useEffect(() => {
-    // if not in a search then search to sessionstorage
+    // if not in a search, then search to sessionstorage
     if (!searchTerm) {
       // const sessionState = isPersistedState('homeState');
+
       const home = isEmptyObject(homeState);
 
       if (!home) {
