@@ -1,13 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import API from '../API';
 
 // Helpers
 import { isPersistedState } from "../helpers";
 
+// Context
+import { SearchContext } from "../searchContext";
+
 export const useActorFetch = actorId => {
   const [state, setState] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const { actors, setActors } = useContext(SearchContext);
+  console.log(actors)
 
   useEffect(() => {
     const fetchActor = async () => {
@@ -37,10 +43,12 @@ export const useActorFetch = actorId => {
       }
     }
 
-    const sessionState = isPersistedState(actorId);
+    // const sessionState = isPersistedState(actorId);
+    const actorContext = Object.keys(actors).find(actor => actor === actorId);
+    console.log(actors[actorContext])
 
-    if (sessionState) {
-      setState(sessionState);
+    if (actorContext) {
+      setState(actorContext);
       setLoading(false);
       return;
     }
@@ -49,8 +57,12 @@ export const useActorFetch = actorId => {
   }, [actorId]);
 
   useEffect(() => {
-    sessionStorage.setItem(actorId, JSON.stringify(state));
-  }, [actorId, state]);
+    // sessionStorage.setItem(actorId, JSON.stringify(state));
+    setActors({
+      ...actors,
+      [actorId]: state
+    })
+  }, [actorId, state, setActors]);
 
   return { state, loading, error };
 };
