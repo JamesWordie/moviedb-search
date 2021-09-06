@@ -32,7 +32,7 @@ export const Content = styled.div`
   }
 
   a:hover {
-    cursor: crosshair;
+    cursor: pointer;
   }
 
   .group {

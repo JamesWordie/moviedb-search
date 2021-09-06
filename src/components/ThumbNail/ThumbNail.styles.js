@@ -11,7 +11,7 @@ export const Image = styled.img`
 
   :hover {
     opacity: 0.8;
-    cursor: crosshair;
+    cursor: pointer;
   }
 
   @keyframes animateMovieImage {
