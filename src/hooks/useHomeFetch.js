@@ -63,7 +63,7 @@ export const useHomeFetch = () => {
     }
     setState(initialState);
     fetchMovies(1, searchTerm);
-  }, [searchTerm]) //dependency array trigger on home component mount and when searchTerm changes
+  }, [searchTerm]) //dependency array trigger on home component mount and when searchTerm changes // ignore movies dependancy, goes into infinite loop if included
 
   // load more movies
   useEffect(() => {
@@ -79,7 +79,7 @@ export const useHomeFetch = () => {
     if (!searchTerm) {
       setHomeState(state);
     }
-  }, [state])
+  }, [state]) // ignore searchTerm and setHomeState dependancy, goes into infinite loop if included
 
   return { state, loading, error, searchTerm, setState, setSearchTerm, setIsLoadingMore };
 };
