@@ -27,7 +27,7 @@ const MovieInfo = ({ movie }) => {
       movie.id,
       value
     );
-    return rate.success ? window.alert(`You rated the movie a ${value}/10.`) : null;
+    return rate.success ? window.alert(`You rated the movie a ${value}/5.`) : null;
   }
 
   return (
