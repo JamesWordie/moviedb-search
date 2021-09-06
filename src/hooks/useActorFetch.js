@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import API from '../API';
 
-// Helpers
-import { isPersistedState } from "../helpers";
+// Context
+import { SearchContext } from "../searchContext";
 
 export const useActorFetch = actorId => {
   const [state, setState] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const { actors, setActors } = useContext(SearchContext);
 
   useEffect(() => {
     const fetchActor = async () => {
@@ -37,20 +39,25 @@ export const useActorFetch = actorId => {
       }
     }
 
-    const sessionState = isPersistedState(actorId);
+    // check to see if the current actorid exists in the context of the app
+    const actorContext = Object.keys(actors).find(actor => actor === actorId);
 
-    if (sessionState) {
-      setState(sessionState);
+    if (actorContext) {
+      setState(actors[actorContext]);
       setLoading(false);
       return;
     }
 
     fetchActor();
-  }, [actorId]);
+  }, [actorId]); // ignore actors dependancy, goes into infinite loop if included
 
+  // use effect to store the actor to the Acotrs in the Context, easy reload reducing API calls
   useEffect(() => {
-    sessionStorage.setItem(actorId, JSON.stringify(state));
-  }, [actorId, state]);
+    setActors({
+      ...actors,
+      [actorId]: state
+    })
+  }, [actorId, state, setActors]); // ignore actors dependancy, goes into infinite loop if included
 
   return { state, loading, error };
 };

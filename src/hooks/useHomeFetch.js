@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 // Api
 import API from '../API';
 
 // Helpers
-import { isPersistedState } from '../helpers';
+import { isEmptyObject } from '../helpers';
+
+// Context
+import { SearchContext } from '../searchContext';
 
 const initialState = {
   page: 0,
@@ -14,12 +17,13 @@ const initialState = {
 };
 
 export const useHomeFetch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [state, setState] = useState(initialState);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [visited, setVisited] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(''); //searchTerm
+  const [state, setState] = useState(initialState); // movies
+  const [loading, setLoading] = useState(false); // loading
+  const [error, setError] = useState(false); // errors
+  const [isLoadingMore, setIsLoadingMore] = useState(false); // loading more
+
+  const { homeState, setHomeState } = useContext(SearchContext);
 
   const fetchMovies = async (page, searchTerm = "") => {
     try {
@@ -28,6 +32,7 @@ export const useHomeFetch = () => {
 
       const movies = await API.fetchMovies(searchTerm, page);
 
+      // revert to popular movies if no results
       if (movies.results.length === 0) {
         setTimeout(() => {
           setSearchTerm('');
@@ -47,12 +52,12 @@ export const useHomeFetch = () => {
 
   // initial render and search
   useEffect(() => {
-    // if not in a search then search to sessionstorage
+    // if not in a search, then check homestate context
     if (!searchTerm) {
-      const sessionState = isPersistedState('homeState');
+      const home = isEmptyObject(homeState);
 
-      if (sessionState) {
-        setState(sessionState);
+      if (!home) {
+        setState(homeState);
         return;
       }
     }
@@ -69,25 +74,12 @@ export const useHomeFetch = () => {
 
   }, [isLoadingMore, state.page, searchTerm]);
 
-  // write to sessionStorage
+  // use effect to write to set home state
   useEffect(() => {
     if (!searchTerm) {
-      sessionStorage.setItem('homeState', JSON.stringify(state));
+      setHomeState(state);
     }
-  }, [searchTerm, state]);
+  }, [state])
 
-  // useEffect to deal with the information alert
-  useEffect(() => {
-    if (!visited) {
-      const beenVisited = isPersistedState('visited');
-
-      if (beenVisited) {
-        setVisited(true);
-      };
-    }
-
-    sessionStorage.setItem('visited', JSON.stringify(true));
-  }, [visited]);
-
-  return { state, loading, error, searchTerm, visited, setSearchTerm, setIsLoadingMore, setVisited };
+  return { state, loading, error, searchTerm, setState, setSearchTerm, setIsLoadingMore };
 };

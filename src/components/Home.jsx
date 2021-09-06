@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 // Config
 import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
+
+// Context
+import { SearchContext } from '../searchContext';
+import { Context } from '../context';
 
 // Components
 import Banner from './Banner';
@@ -21,15 +25,22 @@ import NoImage from '../images/no_image.jpg';
 import BreadCrumb from './BreadCrumb';
 
 const Home = () => {
-  const { state, loading, error, searchTerm, visited, setSearchTerm, setIsLoadingMore, setVisited } = useHomeFetch();
+  const { state, loading, error, searchTerm, setState, setSearchTerm, setIsLoadingMore } = useHomeFetch();
+  const { visited, setVisited, homeState } = useContext(SearchContext);
+  const [user] = useContext(Context);
 
   const movie = state.results[0];
 
   if (error) return <div>Something went wrong...</div>;
 
+  const handleClick = () => {
+    setState(homeState);
+    setSearchTerm('');
+  }
+
   return (
     <>
-      {!visited && <Alert text="Login with a guest account to rate movies."
+      {!visited && !user && <Alert text="Login with a guest account to rate movies."
         onClick={() => setVisited(true)}
       />}
 
@@ -42,7 +53,7 @@ const Home = () => {
       }
 
       {searchTerm && state.results.length !== 0 &&
-      <BreadCrumb title={searchTerm} />}
+      <BreadCrumb title={searchTerm} onClick={handleClick}/>}
 
       <SearchBar setSearchTerm={setSearchTerm} />
 

@@ -27,6 +27,6 @@ export const Content = styled.div`
     }
   }
   a span:hover {
-    cursor: crosshair !important;
+    cursor: pointer !important;
   }
 `;

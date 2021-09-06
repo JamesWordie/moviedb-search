@@ -15,25 +15,28 @@ import Footer from './components/Footer';
 
 // Context
 import UserProvider from './context';
+import SearchProvider from './searchContext';
 
 const App = () => {
   return (
     <Router>
-      <UserProvider>
-        <div className="App">
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path="/:movieId" element={<MovieResult />} />
-            <Route path="/actor/:actorId" element={<ActorResult />} />
-            <Route path="/*" element={<NotFound />} />
-            {/* asterisk after the slash returns a not found ie a 404 page */}
-          </Routes>
-          <Footer />
-          <GlobalStyle />
-        </div>
-      </UserProvider>
+      <SearchProvider>
+        <UserProvider>
+          <div className="App">
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              <Route path="/:movieId" element={<MovieResult />} />
+              <Route path="/actor/:actorId" element={<ActorResult />} />
+              <Route path="/*" element={<NotFound />} />
+              {/* asterisk after the slash returns a not found ie a 404 page */}
+            </Routes>
+            <Footer />
+            <GlobalStyle />
+          </div>
+        </UserProvider>
+      </SearchProvider>
     </Router>
   );
 }

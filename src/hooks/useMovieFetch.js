@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import API from '../API';
 
-// Helpers
-import { isPersistedState } from "../helpers";
+// Context
+import { SearchContext } from "../searchContext";
 
 export const useMovieFetch = movieId => {
   const [state, setState] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const { movies, setMovies } = useContext(SearchContext);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -36,21 +38,25 @@ export const useMovieFetch = movieId => {
 
     }
 
-    const sessionState = isPersistedState(movieId);
+    const movieContext = Object.keys(movies).find(movie => movie === movieId);
 
-    if (sessionState) {
-      setState(sessionState);
+    // if not undefined or if movie exists, pick from movies Context, setState
+    if (movieContext) {
+      setState(movies[movieContext]);
       setLoading(false); // so doesn't display loading
       return;
     }
 
     fetchMovie();
-  }, [movieId])
+  }, [movieId]) // ignore movies dependancy, goes into infinite loop if included
 
-  // write to the sessionStorage with the individual movie
+  // add each movie to the movies Context, to allow easy reload once fetched from API
   useEffect(() => {
-    sessionStorage.setItem(movieId, JSON.stringify(state));
-  }, [movieId, state])
+    setMovies({
+      ...movies,
+      [movieId]: state
+    })
+  }, [movieId, state, setMovies]) // ignore movies dependancy, goes into infinite loop if included
 
   return { state, loading, error };
 };

@@ -19,7 +19,7 @@ const Login = () => {
   // const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [authenticateGuest, setAuthenticateGuest] = useState(false);
-  const [_user, setUser] = useContext(Context);
+  const [_user, setUser] = useContext(Context); // have to keep user, goes into infinite loop if included/crashes if removed
   const navigate = useNavigate();
 
   const url = window.location.search;
@@ -41,7 +41,7 @@ const Login = () => {
       const requestToken = sessionStorage.getItem('requestToken');
       handleSessionId(requestToken);
     }
-  }, [url]);
+  }, [url]); // ignore handleSessionId dependancy, goes into infinite loop if included
 
   // const handleInput = (e) => {
   //   const name = e.currentTarget.name;

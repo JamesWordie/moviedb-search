@@ -32,7 +32,7 @@ export const Content = styled.div`
 
     a {
       text-decoration: none;
-      cursor: crosshair;
+      cursor: pointer;
     }
   }
 

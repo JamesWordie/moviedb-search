@@ -11,6 +11,10 @@ export const Wrapper = styled.div`
   opacity: 0.8;
   border: 1px solid var(--lightGrey);
 
+  &:hover {
+    cursor: pointer;
+  }
+
   @media (max-width: 500px) {
     margin: 0 auto;
     width: 100%;

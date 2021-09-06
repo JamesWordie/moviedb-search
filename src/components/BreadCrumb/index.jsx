@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 // Styles
 import { Wrapper, Content  } from '../BreadCrumb/BreadCrumb.styles';
 
-const BreadCrumb = ({ title }) => {
+const BreadCrumb = ({ title, onClick }) => {
   return (
     <Wrapper>
       <Content>
-        <Link to='/'>
+        <Link to='/' onClick={() => onClick()}>
           <span>Home</span>
         </Link>
         <span>|</span>
