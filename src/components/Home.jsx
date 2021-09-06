@@ -5,6 +5,7 @@ import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
 
 // Context
 import { SearchContext } from '../searchContext';
+import { Context } from '../context';
 
 // Components
 import Banner from './Banner';
@@ -26,6 +27,7 @@ import BreadCrumb from './BreadCrumb';
 const Home = () => {
   const { state, loading, error, searchTerm, setState, setSearchTerm, setIsLoadingMore } = useHomeFetch();
   const { visited, setVisited, homeState } = useContext(SearchContext);
+  const [user] = useContext(Context);
 
   const movie = state.results[0];
 
@@ -38,7 +40,7 @@ const Home = () => {
 
   return (
     <>
-      {!visited && <Alert text="Login with a guest account to rate movies."
+      {!visited && !user && <Alert text="Login with a guest account to rate movies."
         onClick={() => setVisited(true)}
       />}
 
