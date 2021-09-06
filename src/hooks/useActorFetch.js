@@ -43,12 +43,11 @@ export const useActorFetch = actorId => {
       }
     }
 
-    // const sessionState = isPersistedState(actorId);
+    // check to see if the current actorid exists in the context of the app
     const actorContext = Object.keys(actors).find(actor => actor === actorId);
-    console.log(actors[actorContext])
 
     if (actorContext) {
-      setState(actorContext);
+      setState(actors[actorContext]);
       setLoading(false);
       return;
     }
@@ -56,8 +55,8 @@ export const useActorFetch = actorId => {
     fetchActor();
   }, [actorId]);
 
+  // use effect to store the actor to the Acotrs in the Context, easy reload reducing API calls
   useEffect(() => {
-    // sessionStorage.setItem(actorId, JSON.stringify(state));
     setActors({
       ...actors,
       [actorId]: state
