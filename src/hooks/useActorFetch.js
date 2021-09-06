@@ -13,7 +13,6 @@ export const useActorFetch = actorId => {
   const [error, setError] = useState(false);
 
   const { actors, setActors } = useContext(SearchContext);
-  console.log(actors)
 
   useEffect(() => {
     const fetchActor = async () => {

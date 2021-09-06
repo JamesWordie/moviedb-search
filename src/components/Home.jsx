@@ -24,12 +24,17 @@ import NoImage from '../images/no_image.jpg';
 import BreadCrumb from './BreadCrumb';
 
 const Home = () => {
-  const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } = useHomeFetch();
-  const { visited, setVisited } = useContext(SearchContext);
+  const { state, loading, error, searchTerm, setState, setSearchTerm, setIsLoadingMore } = useHomeFetch();
+  const { visited, setVisited, homeState } = useContext(SearchContext);
 
   const movie = state.results[0];
 
   if (error) return <div>Something went wrong...</div>;
+
+  const handleClick = () => {
+    setState(homeState);
+    setSearchTerm('');
+  }
 
   return (
     <>
@@ -46,7 +51,7 @@ const Home = () => {
       }
 
       {searchTerm && state.results.length !== 0 &&
-      <BreadCrumb title={searchTerm} />}
+      <BreadCrumb title={searchTerm} onClick={handleClick}/>}
 
       <SearchBar setSearchTerm={setSearchTerm} />
 

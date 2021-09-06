@@ -52,10 +52,8 @@ export const useHomeFetch = () => {
 
   // initial render and search
   useEffect(() => {
-    // if not in a search, then search to sessionstorage
+    // if not in a search, then check homestate context
     if (!searchTerm) {
-      // const sessionState = isPersistedState('homeState');
-
       const home = isEmptyObject(homeState);
 
       if (!home) {
@@ -65,7 +63,7 @@ export const useHomeFetch = () => {
     }
     setState(initialState);
     fetchMovies(1, searchTerm);
-  }, [searchTerm, homeState]) //dependency array trigger on home component mount and when searchTerm changes
+  }, [searchTerm]) //dependency array trigger on home component mount and when searchTerm changes
 
   // load more movies
   useEffect(() => {
@@ -77,11 +75,11 @@ export const useHomeFetch = () => {
   }, [isLoadingMore, state.page, searchTerm]);
 
   // use effect to write to set home state
-  // useEffect(() => {
-  //   if (!searchTerm) {
-  //     setHomeState(state);
-  //   }
-  // }, [searchTerm])
+  useEffect(() => {
+    if (!searchTerm) {
+      setHomeState(state);
+    }
+  }, [state])
 
-  return { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore };
+  return { state, loading, error, searchTerm, setState, setSearchTerm, setIsLoadingMore };
 };
