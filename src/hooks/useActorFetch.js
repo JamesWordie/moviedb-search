@@ -1,9 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import API from '../API';
 
-// Helpers
-import { isPersistedState } from "../helpers";
-
 // Context
 import { SearchContext } from "../searchContext";
 
@@ -52,7 +49,7 @@ export const useActorFetch = actorId => {
     }
 
     fetchActor();
-  }, [actorId]);
+  }, [actorId]); // ignore actors dependancy, goes into infinite loop if included
 
   // use effect to store the actor to the Acotrs in the Context, easy reload reducing API calls
   useEffect(() => {
@@ -60,7 +57,7 @@ export const useActorFetch = actorId => {
       ...actors,
       [actorId]: state
     })
-  }, [actorId, state, setActors]);
+  }, [actorId, state, setActors]); // ignore actors dependancy, goes into infinite loop if included
 
   return { state, loading, error };
 };

@@ -1,9 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import API from '../API';
 
-// Helpers
-import { isPersistedState } from "../helpers";
-
 // Context
 import { SearchContext } from "../searchContext";
 
@@ -51,7 +48,7 @@ export const useMovieFetch = movieId => {
     }
 
     fetchMovie();
-  }, [movieId])
+  }, [movieId]) // ignore movies dependancy, goes into infinite loop if included
 
   // add each movie to the movies Context, to allow easy reload once fetched from API
   useEffect(() => {
@@ -59,7 +56,7 @@ export const useMovieFetch = movieId => {
       ...movies,
       [movieId]: state
     })
-  }, [movieId, state, setMovies])
+  }, [movieId, state, setMovies]) // ignore movies dependancy, goes into infinite loop if included
 
   return { state, loading, error };
 };
